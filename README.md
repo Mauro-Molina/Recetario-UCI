@@ -22,5 +22,5 @@ https://tu-app.onrender.com
 
 ## Instalación local
 1. `npm install`
-2. Crear archivo `.env` con las variables de entorno necesarias (ej: `PORT`, `MONGO_URI`, `JWT_SECRET`)
+2. Crear archivo `.env` con las variables de entorno necesarias (ej: `PORT`, `MONGO_URI`, `JWT_SECRET`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `EMAIL_USER`, `EMAIL_PASS`)
 3. `npm run dev` (para desarrollo) o `npm start` (para producción)

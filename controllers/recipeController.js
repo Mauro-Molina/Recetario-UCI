@@ -58,12 +58,16 @@ exports.createRecipe = async (req, res, next) => {
     // Procesar ingredientes (separados por comas o saltos de línea)
     const ingredientsArray = ingredients.split(/[,\n]+/).map(i => i.trim()).filter(i => i);
 
+    // Obtener ruta de la imagen si se subió una
+    const imagePath = req.file ? req.file.path : '';
+
     await Recipe.create({
       title,
       description,
       ingredients: ingredientsArray,
       instructions,
       category,
+      image: imagePath,
       author: req.user._id
     });
 
@@ -137,15 +141,23 @@ exports.updateRecipe = async (req, res, next) => {
       ingredientsArray = ingredients.split(/[,\n]+/).map(i => i.trim()).filter(i => i);
     }
 
+    // Actualizar datos
+    const updateData = {
+      title,
+      description,
+      ingredients: ingredientsArray,
+      instructions,
+      category
+    };
+
+    // Si se subió una nueva imagen, se actualiza, si no se mantiene la anterior
+    if (req.file) {
+      updateData.image = req.file.path;
+    }
+
     recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
-      {
-        title,
-        description,
-        ingredients: ingredientsArray,
-        instructions,
-        category
-      },
+      updateData,
       { new: true, runValidators: true }
     );
 

@@ -46,6 +46,12 @@
         <% } %>
       </div>
 
+      <% if (recipe.image) { %>
+        <div class="mb-4 text-center">
+          <img src="<%= recipe.image %>" alt="<%= recipe.title %>" class="img-fluid rounded-4 shadow-sm" style="max-height: 400px; width: 100%; object-fit: cover;">
+        </div>
+      <% } %>
+
       <p class="lead text-muted mb-0" style="line-height: 1.8; font-size: 1.2rem;"><%= recipe.description %></p>
     </div>
 

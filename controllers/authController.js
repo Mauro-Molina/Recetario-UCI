@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { sendWelcomeEmail } = require('../services/emailService');
 
 // Generar JWT
 const generateToken = (id) => {
@@ -87,6 +88,9 @@ exports.postRegister = async (req, res) => {
       password,
       role: 'user' // Por defecto
     });
+
+    // Enviar email de bienvenida asíncronamente (sin bloquear la respuesta)
+    sendWelcomeEmail(user.email, user.name);
 
     // Generar token y cookie
     const token = generateToken(user._id);

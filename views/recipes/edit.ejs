@@ -19,10 +19,22 @@
           </div>
         <% } %>
 
-        <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+        <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
           <div class="mb-4">
             <label for="title" class="form-label"><i class="fa-solid fa-heading text-primary me-2"></i> Título de la Receta</label>
             <input type="text" class="form-control custom-form-control" id="title" name="title" value="<%= recipe.title %>" required>
+          </div>
+          
+          <div class="mb-4">
+            <label for="image" class="form-label"><i class="fa-solid fa-image text-danger me-2"></i> Imagen de la Receta</label>
+            <% if (recipe.image) { %>
+              <div class="mb-3">
+                <img src="<%= recipe.image %>" alt="Imagen actual" class="img-thumbnail" style="max-height: 150px; border-radius: 12px; object-fit: cover;">
+                <p class="text-muted small mt-1">Imagen actual</p>
+              </div>
+            <% } %>
+            <input type="file" class="form-control custom-form-control" id="image" name="image" accept="image/*">
+            <div class="form-text mt-2"><i class="fa-solid fa-circle-info me-1"></i> Selecciona una nueva imagen solo si deseas cambiar la actual (Máx. 5MB).</div>
           </div>
           
           <div class="mb-4">

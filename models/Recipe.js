@@ -23,6 +23,10 @@ const recipeSchema = new mongoose.Schema({
     enum: ['Desayuno', 'Almuerzo', 'Cena', 'Postre', 'Bebida', 'Otro'],
     default: 'Otro'
   },
+  image: {
+    type: String,
+    default: ''
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
